@@ -1,0 +1,79 @@
+# src/commands/install.yaml
+---
+description: |
+  install twdps/circleci-base-image packages on Ubuntu machine executors
+  (or other debain-based executors)
+
+parameters:
+
+  shell:
+    description: Shell to allow overriding default of the job
+    type: string
+    default: /bin/bash/ -eo pipefail
+
+  op-version:
+    description: 1password-cli version
+    type: string
+
+  teller-version:
+    description: teller version
+    type: string
+    default: 1.5.6
+
+  vault-version:
+    description: Hashi Vault version
+    type: string
+
+  buildevents-version:
+    description: Hashi Vault version
+    type: string
+
+steps:
+  - run:
+      name: install 1password
+      command: |
+        curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" | sudo tee /etc/apt/sources.list.d/1password.list
+        sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/
+        curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
+        sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
+        curl -sS https://downloads.1password.com/linux/keys/1password.asc | sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
+        sudo apt update && sudo apt install 1password-cli<<#parameters.op-version>>=<< parameters.op-version >><</parameters.op-version>>
+        op --version
+  - run:
+      name: install teller
+      command: |
+        curl -L https://github.com/tellerops/teller/releases/download/v<< parameters.teller-version >>/teller_<< parameters.teller-version >>_Linux_x86_64.tar.gz --output teller_<< parameters.teller-version >>_Linux_x86_64.tar.gz
+        tar -xzf teller_<< parameters.teller-version >>_Linux_x86_64.tar.gz teller
+        rm teller_<< parameters.teller-version >>_Linux_x86_64.tar.gz
+        sudo mv teller /usr/local/bin/teller
+        teller version
+  - run:
+      name: install vault
+      command: |
+        wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+        echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+        sudo apt update && sudo apt install vault<<#parameters.vault-version>>=<< parameters.vault-version >><</parameters.vault-version>>
+        vault version
+  - unless:
+      name: install buildevents
+      condition: << parameters.honeycomb-version >>
+      steps:
+        - run:
+            name: install buildevents
+            command: |
+              curl -L -o buildevents https://github.com/honeycombio/buildevents/releases/latest/download/buildevents-linux-amd64
+              sudo chmod +x buildevents
+              sudo mv buildevents /usr/local/bin/buildevents
+              buildevents --version
+  - when:
+      name: install buildevents
+      condition: << parameters.honeycomb-version >>
+      steps:
+        - run:
+            name: install buildevents
+            command: |
+              curl -L -o buildevents https://github.com/honeycombio/buildevents/releases/download/v<< parameters.honeycomb-version >>/buildevents-linux-amd64
+              sudo chmod +x buildevents
+              sudo mv buildevents /usr/local/bin/buildevents
+              buildevents --version

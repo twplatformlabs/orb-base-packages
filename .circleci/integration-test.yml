@@ -1,0 +1,55 @@
+---
+version: 2.1
+
+orbs:
+  base-packages: twdps/base-packages@dev:<<pipeline.git.revision>>
+
+globals:
+  - &context orb-publishing
+
+jobs:
+
+  test install pinned:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: medium
+    steps:
+      - checkout
+      - base-packages/install:
+          op-version: 2.23.0-1
+          teller-version: 1.5.4
+          vault-version: 1.15.3-1
+          honeycomb-version: 0.14.0
+      - run:
+          name: confirm installed version for available packages
+          command: |
+            set -exo pipefail
+            op --version | grep "2.23.0"
+            teller version | grep "1.5.4"
+            vault version | grep "1.15.3"
+            buildevents version | grep "0.14.0"
+
+  test install unpinned:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: medium
+    steps:
+      - checkout
+      - base-packages/install
+      - run:
+          name: confirm installed version for available packages
+          command: |
+            set -exo pipefail
+            op --help | grep "Usage:"
+            teller --help | grep "Usage:"
+            vault --help | grep "Usage:"
+            buildevents --help | grep "Usage:"
+
+workflows:
+
+  integration tests:
+    jobs:
+      - test install pinned:
+          context: *context
+      - test install unpinned:
+          context: *context
