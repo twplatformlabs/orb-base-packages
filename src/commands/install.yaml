@@ -15,6 +15,7 @@ parameters:
   op-version:
     description: 1password-cli version
     type: string
+    default: ""
 
   teller-version:
     description: teller version
@@ -24,10 +25,12 @@ parameters:
   vault-version:
     description: Hashi Vault version
     type: string
+    default: ""
 
   buildevents-version:
     description: Hashi Vault version
     type: string
+    default: ""
 
 steps:
   - run:
