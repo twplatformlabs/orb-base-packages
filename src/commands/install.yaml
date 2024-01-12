@@ -1,4 +1,5 @@
 # src/commands/install.yaml
+# yamllint disable rule:line-length
 ---
 description: |
   install twdps/circleci-base-image packages on Ubuntu machine executors

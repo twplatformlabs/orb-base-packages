@@ -1,4 +1,5 @@
 # src/examples/standard-workflow.yaml
+# yamllint disable rule:line-length
 ---
 description: |
   Standard workflow demonstrating use of base-packages install.
@@ -24,13 +25,13 @@ usage:
   jobs:
 
     my-machine-job:
-        machine:
-          image: ubuntu-2204:current
-        resource_class: medium
-        steps:
-          - checkout
-          - base-packages/install
-          # the rest of my job can now use dependent base-image packages
+      machine:
+        image: ubuntu-2204:current
+      resource_class: medium
+      steps:
+        - checkout
+        - base-packages/install
+        # the rest of my job can now use dependent base-image packages
 
   workflows:
     version: 2
