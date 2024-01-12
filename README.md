@@ -10,7 +10,9 @@
 </div>
 <br />
 
-Presently this includes:  
+We recommend organizations maintain a base-image to be used for building all other circleci executors. The purpose of this image is to assure both that executors have the CircleCI required packages to successfully run as an executor, that the base iamge is secure and up to date, and that the generally required exeterprise packages are available (chiefly secrets access or other similar packages necessary for all executors based on organizational use or practices).  
+
+Presently for the twdps/circleci-base-image executor this includes:  
 - [1password cli](https://app-updates.agilebits.com/product_history/CLI2)
 - [teller](https://github.com/tellerops/teller)
 - Hashi [Vault](https://developer.hashicorp.com/vault/install?ajs_aid=c30948a0-fd06-4c47-a0c5-aa487b178c5f&product_intent=vault)
