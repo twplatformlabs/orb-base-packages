@@ -16,18 +16,18 @@ jobs:
     steps:
       - checkout
       - base-packages/install:
-          op-version: 2.23.0-1
+          op-version: 2.24.0-1
           teller-version: 1.5.4
-          vault-version: 1.15.3-1
+          vault-version: 1.15.4-1
           buildevents-version: 0.14.0
       - run:
           name: confirm installed version for available packages
           command: |
             set -exo pipefail
-            op --version | grep "2.23.0"
+            op --version | grep "2.24.0"
             teller version | grep "1.5.4"
-            vault version | grep "1.15.3"
-            buildevents version | grep "0.14.0"
+            vault version | grep "1.15.4"
+            buildevents --version | grep "0.14.0"
 
   test install unpinned:
     machine:
@@ -40,9 +40,13 @@ jobs:
           name: confirm installed version for available packages
           command: |
             set -exo pipefail
+            op --version
             op --help | grep "Usage:"
+            teller version
             teller --help | grep "Usage:"
+            vault version
             vault --help | grep "Usage:"
+            buildevents --version
             buildevents --help | grep "Usage:"
 
 workflows:
