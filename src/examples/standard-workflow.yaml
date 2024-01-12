@@ -1,0 +1,40 @@
+# src/examples/standard-workflow.yaml
+---
+description: |
+  Standard workflow demonstrating use of base-packages install.
+
+usage:
+  version: 2.1
+
+  orbs:
+    base-packagse: twdps/base-packages@0.1.0
+
+  on-push-main: &on-push-main
+    branches:
+      only: /main/
+    tags:
+      ignore: /.*/
+
+  on-tag-main: &on-tag-main
+    branches:
+      ignore: /.*/
+    tags:
+      only: /.*/
+
+  jobs:
+
+    my-machine-job:
+        machine:
+          image: ubuntu-2204:current
+        resource_class: medium
+        steps:
+          - checkout
+          - base-packages/install
+          # the rest of my job can now use dependent base-image packages
+
+  workflows:
+    version: 2
+
+    circleci-docker-executor-build-pipeline:
+      jobs:
+        - my-machine-job

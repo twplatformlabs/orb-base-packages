@@ -1,0 +1,15 @@
+---
+version: 2.1
+
+description: |
+  Manage installation of twdps/circleci-base-image packages on ubuntu machine executor
+  (or  other debian-based non-preconfnigured executor).
+
+  Presently this includes:  
+  - [1password cli](https://app-updates.agilebits.com/product_history/CLI2)
+  - [teller](https://github.com/tellerops/teller)
+  - Hashi [Vault](https://developer.hashicorp.com/vault/install?ajs_aid=c30948a0-fd06-4c47-a0c5-aa487b178c5f&product_intent=vault)
+  - Honeycomb [buildevents](https://github.com/honeycombio/buildevents)
+
+display:
+  source_url: "https://github.com/ThoughtWorks-DPS/orb-base-packages"
