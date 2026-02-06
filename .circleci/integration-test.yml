@@ -89,7 +89,7 @@ workflows:
 
   integration tests:
     jobs:
-      - install pinned:
+      - test pinned version installs:
           context: *context
-      - install unpinned:
+      - test latest version installs:
           context: *context
