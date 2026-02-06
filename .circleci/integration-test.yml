@@ -9,7 +9,7 @@ globals:
 
 jobs:
 
-  test install pinned:
+  install pinned:
     machine:
       image: ubuntu-2204:current
     resource_class: medium
@@ -17,43 +17,79 @@ jobs:
       - checkout
       - base-packages/install:
           op-version: 2.24.0-1
-          teller-version: 1.5.4
+          teller-version: 1.5.6
           vault-version: 1.15.4-1
-          buildevents-version: 0.14.0
+          bats-version: 1.5.0
+          cosign-version: 2.1.1
+          grype-version: 0.41.0
+          hadolint-version: 2.12.0
+          oras-version: 0.14.0
+          snyk-version: 1.103.0
+          syft-version: 0.81.0
+          trivy-version: 0.32.0
       - run:
           name: confirm installed version for available packages
           command: |
             set -exo pipefail
             op --version | grep "2.24.0"
-            teller version | grep "1.5.4"
+            teller version | grep "1.5.6"
             vault version | grep "1.15.4"
-            buildevents --version | grep "0.14.0"
+            bats --version | grep "1.5.0"
+            cosign --version | grep "2.1.1"
+            grype --version | grep "0.41.0"
+            hadolint --version | grep "2.12.0"
+            oras --version | grep "0.14.0"
+            snyk --version | grep "1.103.0"
+            syft --version | grep "0.81.0"
+            trivy --version | grep "0.32.0"
 
-  test install unpinned:
+  install unpinned:
     machine:
       image: ubuntu-2204:current
     resource_class: medium
     steps:
       - checkout
-      - base-packages/install
+      - base-packages/install:
+          op-version: latest
+          vault-version: latest
+          bats-version: latest
+          cosign-version: latest
+          grype-version: latest
+          hadolint-version: latest
+          oras-version: latest
+          snyk-version: latest
+          syft-version: latest
+          trivy-version: latest
       - run:
           name: confirm installed version for available packages
           command: |
             set -exo pipefail
             op --version
             op --help | grep "Usage:"
-            teller version
-            teller --help | grep "Usage:"
             vault version
             vault --help | grep "Usage:"
-            buildevents --version
-            buildevents --help | grep "Usage:"
+            bats --version
+            bats --help | grep "Usage:"
+            cosign version
+            cosign --help | grep "Usage:"
+            grype --version
+            grype --help | grep "Usage:"
+            hadolint --version
+            hadolint --help | grep "Usage:"
+            oras version
+            oras --help | grep "Usage:"
+            snyk --version
+            snyk --help | grep "Usage:"
+            syft version
+            syft --help | grep "Usage:" 
+            trivy version
+            trivy --help | grep "Usage:"
 
 workflows:
 
   integration tests:
     jobs:
-      - test install pinned:
+      - install pinned:
           context: *context
-      - test install unpinned:
+      - install unpinned:
           context: *context
