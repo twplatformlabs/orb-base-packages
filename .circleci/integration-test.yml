@@ -35,7 +35,7 @@ jobs:
             teller version | grep "1.5.6"
             vault version | grep "1.15.4"
             bats --version | grep "1.5.0"
-            cosign --version | grep "2.1.1"
+            cosign version | grep "2.1.1"
             grype --version | grep "0.41.0"
             hadolint --version | grep "2.12.0"
             oras --version | grep "0.14.0"
