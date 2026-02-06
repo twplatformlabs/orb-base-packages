@@ -42,7 +42,7 @@ parameters:
 
   hadolint-version:
     description: Specify a version to install Hadolint. Also accepts 'latest'.
-    type: string  
+    type: string
     default: ""
 
   oras-version:
@@ -118,7 +118,7 @@ steps:
             environment:
               GRYPE_VERSION: << parameters.grype-version >>
             command: <<include(scripts/install_grype.sh)>>
-  
+
   - when:
       condition: << parameters.hadolint-version >>
       steps:

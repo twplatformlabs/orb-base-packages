@@ -21,6 +21,6 @@ description: |
   * Snyk
   * Syft
   * Trivy
-  
+
 display:
   source_url: "https://github.com/twplatformlabs/orb-base-packages"

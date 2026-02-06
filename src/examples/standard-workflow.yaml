@@ -19,7 +19,7 @@ usage:
         - checkout
         - base-packages/install:
             cosign-version: 2.1.1  # can provide a version for any supported package
-  
+
   workflows:
 
     circleci-docker-executor-build-pipeline:
