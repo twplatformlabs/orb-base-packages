@@ -1,0 +1,165 @@
+# src/commands/install.yaml
+# yamllint disable rule:line-length
+---
+description: Install PSK base packages
+
+parameters:
+
+  shell:
+    description: Shell to allow overriding default of the job
+    type: string
+    default: /bin/bash/ -eo pipefail
+
+  op-version:
+    description: Specify a version to install the 1Password CLI. Also accepts 'latest' or 'latest-beta'.
+    type: string
+    default: ""
+
+  teller-version:
+    description: Only v1.5.6 supported.
+    type: string
+    default: ""
+
+  vault-version:
+    description: Specify a version to install Hashi Vault. Also accepts 'latest'.
+    type: string
+    default: ""
+
+  bats-version:
+    description: Specify a version to install Bats. Also accepts 'latest'.
+    type: string
+    default: ""
+
+  cosign-version:
+    description: Specify a version to install Cosign. Also accepts 'latest'.
+    type: string
+    default: ""
+
+  grype-version:
+    description: Specify a version to install Grype. Also accepts 'latest'.
+    type: string
+    default: ""
+
+  hadolint-version:
+    description: Specify a version to install Hadolint. Also accepts 'latest'.
+    type: string  
+    default: ""
+
+  oras-version:
+    description: Specify a version to install Oras. Also accepts 'latest'.
+    type: string
+    default: ""
+
+  snyk-version:
+    description: Specify a version to install Snyk. Also accepts 'latest'.
+    type: string
+    default: ""
+
+  syft-version:
+    description: Specify a version to install Syft. Also accepts 'latest'.
+    type: string
+    default: ""
+
+  trivy-version:
+    description: Specify a version to install Trivy. Also accepts 'latest'.
+    type: string
+    default: ""
+
+steps:
+
+  - when:
+      condition: << parameters.op-version >>
+      steps:
+        - run:
+            name: install 1password-cli version << parameters.op-version >>
+            environment:
+              OP_VERSION: << parameters.op-version >>
+            command: <<include(scripts/install_1password.sh)>>
+
+  - when:
+      condition: << parameters.teller-version >>
+      steps:
+        - run:
+            name: install teller version 1.5.6, no other version currently supported
+            command: <<include(scripts/install_teller.sh)>>
+
+  - when:
+      condition: << parameters.vault-version >>
+      steps:
+        - run:
+            name: install Hashi Vault version << parameters.vault-version >>
+            environment:
+              VAULT_VERSION: << parameters.vault-version >>
+            command: <<include(scripts/install_vault.sh)>>
+
+  - when:
+      condition: << parameters.bats-version >>
+      steps:
+        - run:
+            name: install Bats version << parameters.bats-version >>
+            environment:
+              BATS_VERSION: << parameters.bats-version >>
+            command: <<include(scripts/install_bats.sh)>>
+
+  - when:
+      condition: << parameters.cosign-version >>
+      steps:
+        - run:
+            name: install Cosign version << parameters.cosign-version >>
+            environment:
+              COSIGN_VERSION: << parameters.cosign-version >>
+            command: <<include(scripts/install_cosign.sh)>>
+
+  - when:
+      condition: << parameters.grype-version >>
+      steps:
+        - run:
+            name: install Grype version << parameters.grype-version >>
+            environment:
+              GRYPE_VERSION: << parameters.grype-version >>
+            command: <<include(scripts/install_grype.sh)>>
+  
+  - when:
+      condition: << parameters.hadolint-version >>
+      steps:
+        - run:
+            name: install Hadolint version << parameters.hadolint-version >>
+            environment:
+              HADOLINT_VERSION: << parameters.hadolint-version >>
+            command: <<include(scripts/install_hadolint.sh)>>
+
+  - when:
+      condition: << parameters.oras-version >>
+      steps:
+        - run:
+            name: install Oras version << parameters.oras-version >>
+            environment:
+              ORAS_VERSION: << parameters.oras-version >>
+            command: <<include(scripts/install_oras.sh)>>
+
+  - when:
+      condition: << parameters.snyk-version >>
+      steps:
+        - run:
+            name: install Snyk version << parameters.snyk-version >>
+            environment:
+              SNYK_VERSION: << parameters.snyk-version >>
+            command: <<include(scripts/install_snyk.sh)>>
+
+  - when:
+      condition: << parameters.syft-version >>
+      steps:
+        - run:
+            name: install Syft version << parameters.syft-version >>
+            environment:
+              SYFT_VERSION: << parameters.syft-version >>
+            command: <<include(scripts/install_syft.sh)>>
+
+  - when:
+      condition: << parameters.trivy-version >>
+      steps:
+        - run:
+            name: install Trivy version << parameters.trivy-version >>
+            environment:
+              TRIVY_VERSION: << parameters.trivy-version >>
+            command: <<include(scripts/install_trivy.sh)>>
