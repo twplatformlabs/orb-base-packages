@@ -16,7 +16,7 @@ jobs:
     steps:
       - checkout
       - base-packages/install:
-          op-version: 2.24.0-1
+          op-version: 2.31.1
           teller-version: 1.5.6
           vault-version: 1.15.4-1
           bats-version: 1.5.0
@@ -31,7 +31,7 @@ jobs:
           name: confirm installed version for available packages
           command: |
             set -exo pipefail
-            op --version | grep "2.24.0"
+            op --version | grep "2.31.1"
             teller version | grep "1.5.6"
             vault version | grep "1.15.4"
             bats --version | grep "1.5.0"
@@ -79,7 +79,7 @@ jobs:
             oras version
             oras --help | grep "Usage:"
             snyk --version
-            snyk --help | grep "Usage:"
+            snyk --help | grep "How to get started"
             syft version
             syft --help | grep "Usage:" 
             trivy version
