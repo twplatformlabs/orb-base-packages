@@ -21,7 +21,7 @@ jobs:
           vault-version: 1.15.4-1
           bats-version: 1.5.0
           cosign-version: 2.1.1
-          grype-version: 0.41.0
+          grype-version: 0.91.0
           hadolint-version: 2.12.0
           oras-version: 0.14.0
           snyk-version: 1.103.0
@@ -36,7 +36,7 @@ jobs:
             vault version | grep "1.15.4"
             bats --version | grep "1.5.0"
             cosign version | grep "2.1.1"
-            grype --version | grep "0.41.0"
+            grype --version | grep "0.91.0"
             hadolint --version | grep "2.12.0"
             oras --version | grep "0.14.0"
             snyk --version | grep "1.103.0"
