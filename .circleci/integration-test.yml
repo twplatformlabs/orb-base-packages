@@ -9,7 +9,7 @@ globals:
 
 jobs:
 
-  install pinned:
+  test pinned version installs:
     machine:
       image: ubuntu-2204:current
     resource_class: medium
@@ -43,7 +43,7 @@ jobs:
             syft --version | grep "0.81.0"
             trivy --version | grep "0.32.0"
 
-  install unpinned:
+  test latest version installs:
     machine:
       image: ubuntu-2204:current
     resource_class: medium

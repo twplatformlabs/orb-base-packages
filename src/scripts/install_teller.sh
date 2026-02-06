@@ -7,4 +7,4 @@ sudo tar -xvf teller_1.5.6_Linux_x86_64.tar.gz teller
 sudo mv ./teller /usr/local/bin/teller
 rm teller_1.5.6_Linux_x86_64.tar.gz
 
-cosign version
+teller version
