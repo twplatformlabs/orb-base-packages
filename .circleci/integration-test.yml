@@ -38,10 +38,10 @@ jobs:
             cosign version | grep "2.1.1"
             grype --version | grep "0.91.0"
             hadolint --version | grep "2.12.0"
-            oras --version | grep "0.14.0"
+            oras version | grep "0.14.0"
             snyk --version | grep "1.103.0"
-            syft --version | grep "0.81.0"
-            trivy --version | grep "0.32.0"
+            syft version | grep "0.81.0"
+            trivy version | grep "0.32.0"
 
   test latest version installs:
     machine:
