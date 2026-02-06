@@ -1,4 +1,4 @@
-# src/examples/standard-workflow.yaml
+# src/examples/standard-workflow.yml
 # yamllint disable rule:line-length
 ---
 description: Standard workflow demonstrating use of base-packages install.
