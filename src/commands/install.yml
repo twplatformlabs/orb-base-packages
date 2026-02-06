@@ -65,6 +65,11 @@ parameters:
     type: string
     default: ""
 
+  gh-version:
+    description: Specify a version to install the GitHub CLI. Also accepts 'latest'.
+    type: string
+    default: ""
+
 steps:
 
   - when:
@@ -163,3 +168,12 @@ steps:
             environment:
               TRIVY_VERSION: << parameters.trivy-version >>
             command: <<include(scripts/install_trivy.sh)>>
+
+  - when:
+      condition: << parameters.gh-version >>
+      steps:
+        - run:
+            name: install GitHub CLI version << parameters.gh-version >>
+            environment:
+              GH_VERSION: << parameters.gh-version >>
+            command: <<include(scripts/install_gh.sh)>>
