@@ -27,6 +27,7 @@ jobs:
           snyk-version: 1.103.0
           syft-version: 0.81.0
           trivy-version: 0.32.0
+          gh-version: 2.40.1
       - run:
           name: confirm installed version for available packages
           command: |
@@ -42,6 +43,7 @@ jobs:
             snyk --version | grep "1.103.0"
             syft version | grep "0.81.0"
             trivy version | grep "0.32.0"
+            gh version | grep "2.40.1"
 
   test latest version installs:
     machine:
@@ -60,6 +62,7 @@ jobs:
           snyk-version: latest
           syft-version: latest
           trivy-version: latest
+          gh-version: latest
       - run:
           name: confirm installed version for available packages
           command: |
@@ -81,9 +84,11 @@ jobs:
             snyk --version
             snyk --help | grep "How to get started"
             syft version
-            syft --help | grep "Usage:" 
+            syft --help | grep "Usage:"
             trivy version
             trivy --help | grep "Usage:"
+            gh version
+            gh --help | grep "Usage:"
 
 workflows:
 
