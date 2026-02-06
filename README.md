@@ -1,21 +1,27 @@
 <div align="center">
 	<p>
-		<img alt="Thoughtworks Logo" src="https://raw.githubusercontent.com/twplatformlabs/static/master/thoughtworks_flamingo_wave.png?sanitize=true" width=200 />
-    <br />
-		<img alt="DPS Title" src="https://raw.githubusercontent.com/twplatformlabs/static/master/EMPCPlatformStarterKitsImage.png" width=350/>
+		<img alt="Thoughtworks Logo" src="https://raw.githubusercontent.com/twplatformlabs/static/master/psk_banner.png" width=800 />
 	</p>
-  <h3>orb-base-packages</h3>
-  <h5>installation of twdps/circleci-base-image packages on ubuntu machine executor</h5>
-  <a href="https://app.circleci.com/pipelines/github/twplatformlabs/orb-1password-connect"><img src="https://circleci.com/gh/twplatformlabs/orb-1password-connect.svg?style=shield"></a> <a href="https://badges.circleci.com/orbs/twdps/onepassword.svg"><img src="https://badges.circleci.com/orbs/twdps/onepassword.svg"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
+  <h1>orb-base-packages</h1>
+  <h3>bundled set of common pipeline job and commands</h3>
+  <a href="https://app.circleci.com/pipelines/github/twplatformlabs/orb-base-packages"><img src="https://circleci.com/gh/twplatformlabs/orb-base-packages.svg?style=shield"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
 </div>
 <br />
 
-We recommend organizations maintain a base-image to be used for building all other circleci executors. The purpose of this image is to assure both that executors have the CircleCI required packages to successfully run as an executor, that the base iamge is secure and up to date, and that the generally required exeterprise packages are available (chiefly secrets access or other similar packages necessary for all executors based on organizational use or practices).  
+See [orb registry](https://circleci.com/developer/orbs/orb/twdps/base-packages) for detailed usage examples
 
-Presently for the twdps/circleci-base-image executor this includes:  
+Most organizations will have a collection of packages that are broadly used across their executor (or runner) fleet. Generally, pipelines run fastest on pre-configured executors that have all needed packages. But there are situations where this isn't the best choice. What about where a development team needs a different version of a package than the one available on the pre-configured runner? Preconfiguration can fall behind in supporting current release versions. A team may have a unique challenge in adopting the new version of a package with breaking changes. Or, sometimes a particular build can't make effective use of OS virtualization (DinD) and needs to run directly on the CIrcleCI or Github provided VM where these tools aren't available. In both situatiaons, it is useful to have single `install` command (or action) to simplify (and standarize, and make changeble in one location) including install options wherever needed across other shared pipelines.  
+
+Presently, the PSK orb includes:  
 - [1password cli](https://app-updates.agilebits.com/product_history/CLI2)
-- [teller](https://github.com/tellerops/teller)
-- Hashi [Vault](https://developer.hashicorp.com/vault/install?ajs_aid=c30948a0-fd06-4c47-a0c5-aa487b178c5f&product_intent=vault)
-- Honeycomb [buildevents](https://github.com/honeycombio/buildevents)
-
-See [orb registry](https://circleci.com/developer/orbs/orb/twdps/onepassword) for detailed usage examples.
+- [Hashi Vault](https://developer.hashicorp.com/vault/install?ajs_aid=c30948a0-fd06-4c47-a0c5-aa487b178c5f&product_intent=vault)
+- [Teller](https://github.com/tellerops/teller)
+- [Bats](https://github.com/bats-core/bats-core)
+- [Cosign](https://github.com/sigstore/cosign)
+- [GitHub cli](https://cli.github.com)
+- [Grype](https://github.com/anchore/grype)
+- [Hadolint](https://github.com/hadolint/hadolint)
+- [Oras](https://github.com/oras-project/oras)
+- [Snyk](https://github.com/snyk/cli)
+- [Syft](https://github.com/anchore/syft)
+- [Trivy](https://github.com/aquasecurity/trivy)

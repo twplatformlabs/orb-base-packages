@@ -3,17 +3,24 @@
 version: 2.1
 
 description: |
-  Manage installation of twdps/circleci-base-image packages on ubuntu machine executor
+  Reference orb for installing base PSK executor packages on ubuntu machine executor
   (or  other debian-based non-preconfigured executor).
-
-  Presently this includes:
-  - 1password cli
-  - teller (presently the default version is fixed at 1.5.6 rather than always tracking to latest)
-  - Hashi Vault
-  - Honeycomb buildevents
 
   The GitHub organization for these resources has changed to twplatformlabs. Until further
   notice, the CircleCI org slug will remain twdps.
+
+  Supported packages include:
+  * 1Password CLI
+  * Teller (v1.5.6)
+  * Hashi Vault
+  * Bats
+  * Cosign
+  * Grype
+  * Hadolint
+  * Oras
+  * Snyk
+  * Syft
+  * Trivy
   
 display:
   source_url: "https://github.com/twplatformlabs/orb-base-packages"
